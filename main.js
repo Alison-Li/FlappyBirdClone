@@ -11,7 +11,7 @@ var mainState = {
     game.load.image("pipe", "assets/cat.png");
 
     // Load the jump sound effect
-    game.load.audio('jump', 'assets/jump.wav'); 
+    game.load.audio('jump', 'assets/retro-jump.wav'); 
   },
 
   create: function () {
