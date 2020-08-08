@@ -12,6 +12,9 @@ var mainState = {
 
     // Load the jump sound effect
     game.load.audio('jump', 'assets/retro-jump.wav'); 
+
+    // Load the score game-over effect
+    game.load.audio('gameover', 'assets/negative-beeps.wav');
   },
 
   create: function () {
@@ -20,6 +23,9 @@ var mainState = {
 
     // Add the jump sound effect
     this.jumpSound = game.add.audio('jump'); 
+
+    // Add gameover sound effect
+    this.gameOverSound = game.add.audio('gameover');
 
     // Create an empty group
     this.pipes = game.add.group();
@@ -153,6 +159,9 @@ var mainState = {
 
     // Set the alive property of the bird to false
     this.bird.alive = false;
+
+    // Play gameover sound effect
+    this.gameOverSound.play();
 
     // Prevent new pipes from appearing
     game.time.events.remove(this.timer);
