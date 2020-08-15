@@ -49,16 +49,12 @@ var mainState = function (birdURL, pipeURL) {
             // This function will be executed at the beginning
             // That's where we load the images and sounds
 
-            // Load the bird sprite
+            // Load the bird and pipe sprites
             game.load.image("bird", birdURL);
-
-            // Load the pipe sprite
             game.load.image("pipe", pipeURL);
 
-            // Load the jump sound effect
+            // Load the sound effects
             game.load.audio('jump', 'assets/retro-jump.wav'); 
-
-            // Load the score game-over effect
             game.load.audio('gameover', 'assets/negative-beeps.wav');
         },
 
@@ -66,10 +62,8 @@ var mainState = function (birdURL, pipeURL) {
             // This function is called after the preload function
             // Here we set up the game, display sprites, etc.
 
-            // Add the jump sound effect
+            // Add the sound effects
             this.jumpSound = game.add.audio('jump'); 
-
-            // Add gameover sound effect
             this.gameOverSound = game.add.audio('gameover');
 
             // Create an empty group
@@ -78,7 +72,7 @@ var mainState = function (birdURL, pipeURL) {
             // Add pipes to the game, every 1.5 seconds
             this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
 
-            // Change the background color of the game
+            // Set the background color of the game
             game.stage.backgroundColor = "#FFC300";
 
             // Set the physics system
@@ -94,7 +88,7 @@ var mainState = function (birdURL, pipeURL) {
             // Add gravity to the bird to make it fall
             this.bird.body.gravity.y = 1000;
 
-            // Call the 'jump' function when the spacekey is hit
+            // Call the 'jump' function when the spacebar is hit
             var spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
             spaceKey.onDown.add(this.jump, this);
 
@@ -103,6 +97,17 @@ var mainState = function (birdURL, pipeURL) {
             this.labelScore = game.add.text(20, 20, "0", {
               font: "30px Arial",
               fill: "#ffffff",
+            });
+
+            // Display the high score below the current score
+            // Requires retrieving the high score saved for the current session
+            this.highScore = 0;
+            if (sessionStorage.getItem("flappyBirdHighScore") !== null) {
+                this.highScore = parseInt(sessionStorage.getItem("flappyBirdHighScore"));
+            }
+            this.labelHighScore = game.add.text(20, 55, "HIGH SCORE: " + this.highScore, {
+                font: "20px Arial",
+                fill: "#ffffff",
             });
 
             // Move the anchor of the bird to the left and downward
@@ -140,6 +145,13 @@ var mainState = function (birdURL, pipeURL) {
             // Increment the score each time new pipes are created
             this.score += 1;
             this.labelScore.text = this.score;
+
+            // Save the high score in session storage
+            if (this.score > sessionStorage.getItem("flappyBirdHighScore")) {
+                sessionStorage.setItem("flappyBirdHighScore", this.score);
+                // Display the current high score
+                this.labelHighScore.text = "HIGH SCORE: " + this.score;
+            }
         },
 
         update: function () {
