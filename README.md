@@ -1,5 +1,5 @@
-# Flappy Bird Clone
+# FlappyBirdClone
 
-Created using Thomas Palef's tutorial on [How to Make Flappy Bird in HTML5 with Phaser](http://www.lessmilk.com/tutorial/flappy-bird-phaser-1). The default assets feature a special appearance from @Jongwoo-Shim as the bird and his aversion to cats as the obstacles. Thanks to @morrisaurus-rex for adding the feature of being able to upload your own bird and obstacles!
+Created using Thomas Palef's tutorial on [How to Make Flappy Bird in HTML5 with Phaser](http://www.lessmilk.com/tutorial/flappy-bird-phaser-1). Some ideas for future development of this game includes allowing the player to upload their own face and obstacle images to be used in replacement of the bird and the pipes.
 
 ![](flappy-bird-demo.gif)
